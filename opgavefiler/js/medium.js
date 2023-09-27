@@ -88,9 +88,10 @@ fetch(apiEndpoint)
 function extractData(userData) {
     console.log(userData);
     userData.forEach((user) => {
-        console.log(`${user.firstName} ${user.lastName}, ${user.age}`);
+        //console.log(`${user.firstName} ${user.lastName}, ${user.age}`);
         displayUsers(user.firstName, user.lastName, user.age);
     })
+    displayIndividual(userData);
 }
 
 function displayUsers(firstName, lastName, age) {
@@ -102,6 +103,24 @@ function displayUsers(firstName, lastName, age) {
 
     targetDomThree.appendChild(userData);
 
+}
+
+function displayIndividual(userData) {
+    const person = userData[7];
+    for (const key in person) {
+        // address, bank, company, hair are objects
+        if (typeof person[key] === 'object') {
+            console.log(`${key}: ${person[key][key]}`);
+        } else {
+            console.log(`${key}: ${person[key]}`);
+            const targetDomFour = document.getElementById('opgave4');
+            const personData = document.createElement('p');
+
+            personData.innerHTML = `${key}: ${person[key]}`;
+
+            targetDomFour.appendChild(personData);
+        }
+    }
 }
 
 console.groupEnd();

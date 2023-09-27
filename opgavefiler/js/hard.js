@@ -3,7 +3,51 @@
 
 
 console.group("opgave 1");
+const apiEndpoint = "https://dummyjson.com/users";
 
+fetch(apiEndpoint)
+.then((response) => {
+    return response.json();
+})
+.then((data) => {
+    //console.log(data);
+
+    extractData(data);
+})
+.catch((error) => {
+    console.error(error);
+})
+
+function extractData(data) {
+    const userData = data.users;
+    console.log(userData);
+
+    displayData(userData);
+}
+
+function displayData(userData) {
+    const targetDom = document.getElementById('opgave1');
+    //console.log(targetDom);
+    const myButton = document.createElement("button");
+    //console.log(myButton);
+
+    userData.forEach((user) => {
+        const firstname = user.firstName;
+        const lastname = user.lastName;
+        console.log(`${firstname} ${lastname}`);
+
+        myButton.addEventListener('click',(e) => {
+            const names = document.createElement('li');
+            names.innerHTML += `${firstname} ${lastname}`;
+            targetDom.appendChild(names);
+        })
+
+    });
+    myButton.innerHTML = 'vis';
+    targetDom.appendChild(myButton);
+
+    
+}
 
 
 

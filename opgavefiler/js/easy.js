@@ -38,7 +38,6 @@ for (let i = 2; i < 41; i++) {
     numberList.innerHTML = i;
 
     targetDom.appendChild(numberList);
-    
 }
 
 console.groupEnd();

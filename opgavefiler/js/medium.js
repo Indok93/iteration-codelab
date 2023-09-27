@@ -4,6 +4,35 @@ const numbers = [1, 2, 3, 4, 5];
 console.group("opgave 1");
 // din kode her
 
+let sum = 0; // creating variable to store the number in
+let max = "";
+
+
+numbers.forEach((number) => {
+    console.log(number);
+    sum += number;
+
+    if (number > max) {
+        max = number;
+    }
+    
+});
+console.log('Sum af array', sum);
+console.log('Højeste tal', max);
+
+const targetDom = document.getElementById('opgave1');
+let showNumbers = document.createElement('div');
+let showSum = document.createElement('div')
+let showMaxNumber = document.createElement('div')
+
+showNumbers.innerHTML = `<li>${numbers}</li>`;
+showSum.innerHTML = `<li>Summen af array: ${sum}</li>`;
+showMaxNumber.innerHTML = `<li>Højeste tal: ${max}</li>`;
+
+targetDom.appendChild(showNumbers);
+targetDom.appendChild(showSum);
+targetDom.appendChild(showMaxNumber);
+
 
 console.groupEnd();
 
@@ -11,6 +40,28 @@ console.groupEnd();
 /* opgave 2 */
 console.group("opgave 2");
 // din kode her
+const animalData = getData();
+console.log(animalData);
+
+
+animalData.forEach((animal) => {
+    console.log('Navn: ', animal.name);
+    console.log('Beskrivelse: ', animal.shortDescription);
+    
+    const navn = animal.name;
+    const billede = animal.picture;
+
+    const targetDomTwo = document.getElementById('opgave2');
+    let title = document.createElement('h3');
+    let img = document.createElement('img');
+
+    title.innerHTML = `${navn}`;
+    img.src = `${billede}`;
+
+    targetDomTwo.appendChild(title);
+    targetDomTwo.appendChild(img);
+
+});
 
 
 console.groupEnd();
@@ -19,7 +70,39 @@ console.groupEnd();
 /* opgave 3 */
 console.group("opgave 3");
 // din kode her
+const apiEndpoint = "https://dummyjson.com/users";
+fetch(apiEndpoint)
 
+.then((response) => {
+    return response.json();
+})
+.then((data) => {
+    console.log(data);
+    const userData = data.users;
+    extractData(userData);
+})
+.catch((error) => {
+    console.error(error);
+});
+
+function extractData(userData) {
+    console.log(userData);
+    userData.forEach((user) => {
+        console.log(`${user.firstName} ${user.lastName}, ${user.age}`);
+        displayUsers(user.firstName, user.lastName, user.age);
+    })
+}
+
+function displayUsers(firstName, lastName, age) {
+    //console.log(`${firstName}`);
+    const targetDomThree = document.getElementById('opgave3');
+    const userData = document.createElement('li');
+
+    userData.innerHTML = `${firstName} ${lastName}, ${age}`;
+
+    targetDomThree.appendChild(userData);
+
+}
 
 console.groupEnd();
 

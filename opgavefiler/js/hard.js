@@ -38,8 +38,20 @@ function displayData(userData) {
 
         myButton.addEventListener('click',(e) => {
             const names = document.createElement('li');
-            names.innerHTML += `${firstname} ${lastname}`;
+            names.innerHTML = `${firstname} ${lastname}`;
             targetDom.appendChild(names);
+
+            names.addEventListener('click', (e) => {
+                // Get all list items (li elements)
+                const listItems = targetDom.querySelectorAll('li');
+
+                // Iterate through each user and remove 
+                listItems.forEach((user) => {
+                    targetDom.removeChild(user);
+                });
+                
+
+            });
         })
 
     });
